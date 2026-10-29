@@ -5,9 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password generator</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="index.js" defer></script>
   </head>
 
-  <body>
-    Random password generator
+  <body class="min-h-screen min-w-[1000px] bg-[#101b16] font-sans text-[#f0fdf4]">
+    <div class="mx-auto flex min-h-screen w-[920px] flex-col">
+      <header class="flex h-24 shrink-0 items-center justify-between border-b border-[#86efac]/10">
+        <nav>
+          <a
+            href="../index.html"
+            class="inline-flex items-center gap-2 rounded-full border border-[#86efac]/15 bg-white/5 px-4 py-2.5 text-xs font-medium text-[#86efac] transition-colors hover:border-[#86efac]/35 hover:bg-[#86efac]/10 hover:text-[#f0fdf4] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#86efac] motion-reduce:transition-none"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5m7-7-7 7 7 7" />
+            </svg>
+            Back to projects
+          </a>
+        </nav>
+        <span class="text-[10px] font-medium uppercase tracking-[2.5px] text-[#86efac]/65">The everyday collection / 02</span>
+      </header>
+
+      <div class="flex flex-1 items-center justify-center py-10">
+        <div class="w-[520px] h-[571px] bg-[#192B22] rounded-[24px] border-[1px] p-[36px] flex flex-col justify-between border-[#FFFFFF1A]">
+          <div class="bg-[#4ADE8026] w-[44px] h-[44px] rounded-[12px] flex justify-center items-center text-[#86EFAC]" >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-lock preview-icon"
+            >
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <div class=" font-inter font-bold text-[28px] text-[#F0FDF4] flex flex-col" >Password generator <span class="text-[14px] text-[#A4B9AD] font-inter ">A strong password. One click away.</span></div>
+          <div class="flex justify-between flex-col gap-[12px]">
+            <span class="w-[85px] h-[15px] text-[12px] text-[#A4B9AD]">Your password</span>
+            <div class="w-[448px] h-[64px] rounded-[12px] border-[1px] flex justify-between pr-[12px] pl-[16px] bg-[#101B16] border-[#FFFFFF1A] items-center">
+              <div class="w-[173px] h-[24px] font-[roboto-mono] text-[18px] text-[#BBF7D0]">K9#mQ2&xR7!vN4@p</div>
+              <div class="cursor-pointer w-[55px] h-[31px] rounded-[8px] p-[8px_12px] bg-[#FFFFFF0D] flex justify-center items-center text-[12px] text-[#DCECE2]">Copy</div>
+            </div>
+            <span class="w-[207px] h-[15px] text-[12px] text-[#A4B9AD]">Uses letters, numbers, and symbols.</span>
+          </div>
+          <div class="w-[448px] h-[28px] flex justify-between items-center">
+            <div class="w-[111px] h-[17px] text-[14px] text-[#DCECE2]">Password length</div>
+            <div class="w-[22px] h-[24px] font-[roboto-mono] text-[18px] text-[#86EFAC]">16</div>
+          </div>
+          <input type="range" min="8" max="24" value="16px" class="mt-4 w-full cursor-pointer accent-[#4ADE80] ">
+          <div class="w-[448px] h-[6px] flex justify-between items-center">
+            <div class="text-[12px] text-[#8AA294]">8</div>
+            <div class="text-[12px] text-[#8AA294]">24</div>
+          </div>
+          <div class="cursor-pointer w-[448px] h-[48px] rounded-[12px] bg-[#4ADE80] flex justify-center items-center text-[14px] text-[#102418] font-semibold">Generate password</div>
+          <div class="w-[448px] h-[16px] flex justify-center items-center text-[12px] text-[#8AA294]">Generated in your browser. Never saved.</div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
