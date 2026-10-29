@@ -48,21 +48,21 @@
           <div class="flex justify-between flex-col gap-[12px]">
             <span class="w-[85px] h-[15px] text-[12px] text-[#A4B9AD]">Your password</span>
             <div class="w-[448px] h-[64px] rounded-[12px] border-[1px] flex justify-between pr-[12px] pl-[16px] bg-[#101B16] border-[#FFFFFF1A] items-center">
-              <div class="w-[173px] h-[24px] font-[roboto-mono] text-[18px] text-[#BBF7D0]">K9#mQ2&xR7!vN4@p</div>
-              <div class="cursor-pointer w-[55px] h-[31px] rounded-[8px] p-[8px_12px] bg-[#FFFFFF0D] flex justify-center items-center text-[12px] text-[#DCECE2]">Copy</div>
+              <div id="generated-password" class="w-[173px] h-[24px] font-[roboto-mono] text-[18px] text-[#BBF7D0]">K9#mQ2&xR7!vN4@p</div>
+              <button id="generated-password-copy" type="button" class="cursor-pointer w-[55px] h-[31px] rounded-[8px] p-[8px_12px] bg-[#FFFFFF0D] flex justify-center items-center text-[12px] text-[#DCECE2]">Copy</button>
             </div>
-            <span class="w-[207px] h-[15px] text-[12px] text-[#A4B9AD]">Uses letters, numbers, and symbols.</span>
+            <span id="copied-password-word" class="w-[207px] h-[15px] text-[12px] text-[#A4B9AD]">Uses letters, numbers, and symbols.</span>
           </div>
           <div class="w-[448px] h-[28px] flex justify-between items-center">
-            <div class="w-[111px] h-[17px] text-[14px] text-[#DCECE2]">Password length</div>
-            <div class="w-[22px] h-[24px] font-[roboto-mono] text-[18px] text-[#86EFAC]">16</div>
+            <label for="length" class="w-[111px] h-[17px] text-[14px] text-[#DCECE2]">Password length</label>
+            <output id="generated-password-length" for="length" class="w-[22px] h-[24px] font-[roboto-mono] text-[18px] text-[#86EFAC]">16</output>
           </div>
-          <input type="range" min="8" max="24" value="16px" class="mt-4 w-full cursor-pointer accent-[#4ADE80] ">
+          <input id="password-generator-range" type="range" min="8" max="24" value="16px" class="mt-4 w-full cursor-pointer accent-[#4ADE80] ">
           <div class="w-[448px] h-[6px] flex justify-between items-center">
             <div class="text-[12px] text-[#8AA294]">8</div>
             <div class="text-[12px] text-[#8AA294]">24</div>
           </div>
-          <div class="cursor-pointer w-[448px] h-[48px] rounded-[12px] bg-[#4ADE80] flex justify-center items-center text-[14px] text-[#102418] font-semibold">Generate password</div>
+          <button id="password-generator" type="button" class="cursor-pointer w-[448px] h-[48px] rounded-[12px] bg-[#4ADE80] flex justify-center items-center text-[14px] text-[#102418] font-semibold">Generate password</button>
           <div class="w-[448px] h-[16px] flex justify-center items-center text-[12px] text-[#8AA294]">Generated in your browser. Never saved.</div>
         </div>
       </div>
