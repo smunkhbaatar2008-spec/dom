@@ -7,7 +7,7 @@ const displayHour = document.getElementById("hours");
 const state = document.getElementById("state");
  
 let intervalid;
-let startTime = 3800;
+let startTime = 0;
  
 const formatTime = (startTime) => {
   const seconds = Math.floor(startTime % 60)
