@@ -1,5 +1,5 @@
 const generate = document.getElementById("generate");
-const status = document.getElementById("status");
+const statusBar = document.getElementById("status");
 const colors = document.getElementById("colors");
 
 const lightness = [94, 86, 76, 64, 52, 43, 35, 27, 20, 12];
@@ -30,19 +30,16 @@ const families = [
   { name: "fuchsia", hue: 292, saturation: 82 },
 ];
 
-let selectedFamilies = ["red", "amber", "emerald", "sky", "violet", "pink"].map(
-  (name) => families.find((family) => name == family.name),
-);
+let selectedFamilies = ["red", "amber", "emerald", "sky", "violet", "pink"].map((name) => families.find((family) => name == family.name));
 
-const hslToHex = ({ hue, saturation, light }) => {
-  const l = light / 100;
+const hslToHex = ({ hue, saturation, lightness }) => {
+  const l = lightness / 100;
   const s = saturation / 100;
   const amplitude = s * Math.min(l, 1 - l);
 
   const channel = (offset) => {
     const position = (offset + hue / 30) % 12;
-    const value =
-      l - amplitude * Math.max(-1, Math.min(position - 3, 9 - position, 1));
+    const value = l - amplitude * Math.max(-1, Math.min(position - 3, 9 - position, 1));
     return Math.round(255 * value)
       .toString(16)
       .padStart(2, "0");
@@ -52,9 +49,17 @@ const hslToHex = ({ hue, saturation, light }) => {
 };
 
 colors.addEventListener("click", (event) => {
-  const button = event.target.closest("button[data-hex]");
+  const button = event.target.closest("div[data-hex]");
   if (!button) return;
-  navigator.clipboard.writeText(button.dataset.hex);
+
+  const hex = button.dataset.hex;
+  navigator.clipboard.writeText(hex);
+
+  statusBar.textContent = `${hex} is copied`;
+
+  setTimeout(() => {
+    statusBar.textContent = "6 palettes . 60 shades.Click to copy a HEX background color";
+  }, 2000);
 });
 
 const renderColors = () => {
@@ -73,7 +78,7 @@ const renderColors = () => {
       .join("");
 
     const template = `<div  class="w-full h-[136px] gap-3 flex flex-col ">
-              <div  class="text-[14px] text-[#E4E4E7] font-semibold capitalize w-[27px] h-[17px]">${family.name}</div>
+              <div  class="text-[14px] text-[#E4E4E7] font-semibold capitalize w-[27px] h-[17px]">${name}</div>
               <div  class="w-full h-[107px] gap-3 flex">
               ${colorButtons}
               </div>
@@ -88,9 +93,9 @@ generate.addEventListener("click", () => {
 
   for (let i = 0; i < 6; i++) {
     const randomIndex = Math.floor(Math.random() * remaining.length);
+    selectedFamilies.push(remaining[randomIndex]);
+    remaining.splice(randomIndex, 1);
   }
-  selectedFamilies.push(remaining[randomIndex]);
-  remaining.splice(randomIndex, 1);
   renderColors();
 });
 
