@@ -1,3 +1,7 @@
+const generate = document.getElementById("generate");
+const status = document.getElementById("status");
+const colors = document.getElementById("colors");
+
 const lightness = [94, 86, 76, 64, 52, 43, 35, 27, 20, 12];
 const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
@@ -26,16 +30,19 @@ const families = [
   { name: "fuchsia", hue: 292, saturation: 82 },
 ];
 
-let selectedFamilies = ["red", "amber", "emerald", "sky", "violet", "pink"]
+let selectedFamilies = ["red", "amber", "emerald", "sky", "violet", "pink"].map(
+  (name) => families.find((family) => name == family.name),
+);
 
-const hslToHex = (hue, saturation, light) => {
+const hslToHex = ({ hue, saturation, light }) => {
   const l = light / 100;
   const s = saturation / 100;
   const amplitude = s * Math.min(l, 1 - l);
 
   const channel = (offset) => {
     const position = (offset + hue / 30) % 12;
-    const value = l - amplitude * Math.max(-1, Math.min(position - 3, 9 - position, 1));
+    const value =
+      l - amplitude * Math.max(-1, Math.min(position - 3, 9 - position, 1));
     return Math.round(255 * value)
       .toString(16)
       .padStart(2, "0");
@@ -43,3 +50,48 @@ const hslToHex = (hue, saturation, light) => {
 
   return `#${channel(0)}${channel(8)}${channel(4)}`.toUpperCase();
 };
+
+colors.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-hex]");
+  if (!button) return;
+  navigator.clipboard.writeText(button.dataset.hex);
+});
+
+const renderColors = () => {
+  colors.innerHTML = "  ";
+  selectedFamilies.forEach(({ name, hue, saturation }) => {
+    const colorButtons = shades
+      .map((shade, index) => {
+        const hex = hslToHex({ hue, saturation, lightness: lightness[index] });
+        return `<div data-hex="${hex}" class="w-[113px] h-[107px] flex flex-col items-center justify-center">
+                  <button type="button" style="background-color: ${hex}" class="w-full h-16 rounded-xl cursor-pointer  flex"></button>
+                  <span class="w-[38px] h-[43px] pt-2 pb-1px gap-1 flex flex-col font-medium text-3 text-[#D4D4D8] items-center justify-center">${shade}
+                    <span class="text-[9px] text-[#A1A1AA] font-mono font-normal">${hex}</span>
+                  </span>
+                </div>`;
+      })
+      .join("");
+
+    const template = `<div  class="w-full h-[136px] gap-3 flex flex-col ">
+              <div  class="text-[14px] text-[#E4E4E7] font-semibold capitalize w-[27px] h-[17px]">${family.name}</div>
+              <div  class="w-full h-[107px] gap-3 flex">
+              ${colorButtons}
+              </div>
+            </div>`;
+    colors.innerHTML += template;
+  });
+};
+
+generate.addEventListener("click", () => {
+  const remaining = [...families];
+  selectedFamilies = [];
+
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * remaining.length);
+  }
+  selectedFamilies.push(remaining[randomIndex]);
+  remaining.splice(randomIndex, 1);
+  renderColors();
+});
+
+renderColors();
